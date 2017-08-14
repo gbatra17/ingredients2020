@@ -6,9 +6,13 @@ class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      search: ''
+      search: '',
+      receivedObj: false,
+      errorMsg: false
     };
     this.handleSearch = this.handleSearch.bind(this);
+    this.handleSearchObj = this.handleSearchObj.bind(this);
+    this.handleErrorMsg = this.handleErrorMsg.bind(this);
     this.searchDb = this.searchDb.bind(this);
   }
 
@@ -18,7 +22,17 @@ class Dashboard extends Component {
     });
   }
 
+  handleSearchObj() {
+    this.setState({
+      receivedObj: true
+    })
+  }
 
+  handleErrorMsg() {
+    this.setState({
+      errorMsg: true
+    })
+  }
 
   searchDb(e) {
     e.preventDefault();
@@ -34,9 +48,11 @@ class Dashboard extends Component {
     })
     .done((obj) => {
       console.log('received:', obj);
+      this.handleSearchObj;
     })
     .fail((str) => {
       console.log('failed:', str.responseText);
+      this.handleErrorMsg;
     })
 
   }
