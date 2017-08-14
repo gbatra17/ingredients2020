@@ -18,6 +18,8 @@ class Dashboard extends Component {
     });
   }
 
+
+
   searchDb(e) {
     e.preventDefault();
 
@@ -30,8 +32,11 @@ class Dashboard extends Component {
     $.post('/api/ingredients', {
       data: data
     })
-    .done((str) => {
-      console.log('received', str)
+    .done((obj) => {
+      console.log('received:', obj);
+    })
+    .fail((str) => {
+      console.log('failed:', str.responseText);
     })
 
   }
@@ -47,7 +52,7 @@ class Dashboard extends Component {
               onChange={this.handleSearch}/>
           <input type="submit" value="Submit"/>
         </form>
-
+        <div> </div>
       </div>
     );
   }
